@@ -1,0 +1,18 @@
+##gff-version 3
+Fes_sc0000499.1	augustus	gene	5056	9409	.	+	.	ID=Fes_sc0000499.1.g000001.aua.1
+Fes_sc0000499.1	augustus	mRNA	5056	9409	.	+	.	ID=Fes_sc0000499.1.g000001.aua.1.t1;Parent=Fes_sc0000499.1.g000001.aua.1
+
+Fes_sc0000499.1	augustus	CDS	5199	5369	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1
+Fes_sc0000499.1	augustus	CDS	5510	5572	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1
+Fes_sc0000499.1	augustus	CDS	5688	5759	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1
+Fes_sc0000499.1	augustus	CDS	5934	6041	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1
+Fes_sc0000499.1	augustus	CDS	6164	6244	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1
+Fes_sc0000499.1	augustus	CDS	6456	6509	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1
+Fes_sc0000499.1	augustus	CDS	6625	6750	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1
+Fes_sc0000499.1	augustus	CDS	6829	6918	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1
+Fes_sc0000499.1	augustus	CDS	7145	7267	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1
+Fes_sc0000499.1	augustus	CDS	7374	7484	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1
+Fes_sc0000499.1	augustus	CDS	8021	8134	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1
+Fes_sc0000499.1	augustus	CDS	8227	8283	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1
+Fes_sc0000499.1	augustus	CDS	8367	8441	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1
+Fes_sc0000499.1	augustus	CDS	8935	9012	.	+	0	Parent=Fes_sc0000499.1.g000001.aua.1.t1

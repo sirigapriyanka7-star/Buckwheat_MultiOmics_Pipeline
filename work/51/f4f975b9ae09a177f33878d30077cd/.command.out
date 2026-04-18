@@ -1,0 +1,6 @@
+Reading file: all_vs_all_NR_clean.tsv
+Counts: Counter({'440': 2, '372': 2, '433': 1, '256': 1, '239': 1, '426': 1, '253': 1, '999': 1, '965': 1, '501': 1, '497': 1, '478': 1, '468': 1, '451': 1, '442': 1, '381': 1, '902': 1, '613': 1, '482': 1, '477': 1, '462': 1, '937': 1, '474': 1, '416': 1, '394': 1, '366': 1, '939': 1, '453': 1, '447': 1, '437': 1, '906': 1, '410': 1, '399': 1, '337': 1, '956': 1, '612': 1, '444': 1, '895': 1, '436': 1, '913': 1})
+File written: /mnt/c/GeneDuplicationAnalysis/work/51/f4f975b9ae09a177f33878d30077cd/duplication_types.tsv
+total 0
+lrwxrwxrwx 1 priyanka priyanka  65 Apr 17 19:37 all_vs_all_NR_clean.tsv -> /mnt/c/GeneDuplicationAnalysis/InputFiles/all_vs_all_NR_clean.tsv
+-rwxrwxrwx 1 priyanka priyanka 251 Apr 17 19:37 duplication_types.tsv
