@@ -46,7 +46,7 @@ Genome → Gene Identification → Duplication Analysis → Promoter Analysis �
 ---
 
 ## Key Results
-
+Genome dataset downloaded from NCBI (GCA_033239045.1)
 ### Gene Duplication
 | Type | Count |
 |------|------|
