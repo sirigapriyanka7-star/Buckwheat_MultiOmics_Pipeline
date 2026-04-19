@@ -1,2 +1,15 @@
-ncbi_dataset/
-*.fna
+# Large files
+*.bam
+*.bai
+*.fastq.gz
+*.zip
+*.gz
+
+# Conda installers
+Miniconda3-latest-Linux-x86_64.sh
+
+# Index files
+*.ht2
+
+# Temporary
+*.log
