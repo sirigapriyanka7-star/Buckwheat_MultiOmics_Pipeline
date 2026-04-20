@@ -1,0 +1,7 @@
+Date: Thu 09 Apr 2026 10:19:02 
+Ligand: AlphaCurcumene_clean.mol2
+Target: protein2_H.pdb
+Method: Vina
+Sampling exhaustivity: 8
+Box size: 20 20 20
+Box center: 0.0 0.0 -2.0

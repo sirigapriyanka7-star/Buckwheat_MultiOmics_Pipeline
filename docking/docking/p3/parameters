@@ -1,0 +1,7 @@
+Date: Thu 09 Apr 2026 11:32:50 
+Ligand: Aloesin_clean.pdbqt
+Target: protein3_H.pdb
+Method: Vina
+Sampling exhaustivity: 8
+Box size: 20 20 20
+Box center: -11.0 0.0 -6.0
