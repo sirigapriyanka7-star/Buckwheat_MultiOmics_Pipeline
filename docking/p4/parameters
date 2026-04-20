@@ -1,0 +1,7 @@
+Date: Thu 09 Apr 2026 11:48:27 
+Ligand: WithaferinA.mol2
+Target: protein4_H.pdb
+Method: Vina
+Sampling exhaustivity: 8
+Box size: 20 20 20
+Box center: -8.0 0.0 6.0

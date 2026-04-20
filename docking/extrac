@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo -e "Protein\tBest_Energy(kcal/mol)" > final_results.tsv
+
+for p in 1 2 3 4 5; do
+
+    # Extract best energy (mode 1) from vina logs
+    best=$(grep "^ 1 " p${p}/parameters/.log 2>/dev/null | awk '{print $2}' | sort -n | head -1)
+
+    # If logs not inside parameters, try directly
+    if [ -z "$best" ]; then
+        best=$(grep "^ 1 " p${p}/.log 2>/dev/null | awk '{print $2}' | sort -n | head -1)
+    fi
+
+    echo -e "P${p}\t${best}" >> final_results.tsv
+
+done
