@@ -1,144 +1,204 @@
-# Buckwheat Multi-Omics Pipeline
+# 🧬 Collinearity and Synteny Analysis Using MCScanX
 
-## Overview
-
-This repository presents a comprehensive multi-omics workflow to investigate abiotic stress-responsive gene families in Fagopyrum esculentum, supported by transcriptomic evidence from Fagopyrum tataricum under drought stress conditions.
-
-The study focuses on the CBL–CIPK–SOS calcium signaling pathway, integrating genome-wide gene identification, evolutionary analysis, transcriptomics, regulatory element analysis, protein structure prediction, and molecular docking.
+## 📌 Objective
+To identify collinearity and syntenic relationships in Fagopyrum esculentum gene sequences using MCScanX based on protein FASTA files, gene position data, and BLASTP results.
 
 ---
 
-## Objectives
+## 🛠️ Software Selection
 
-- Genome-wide identification of CBL, CIPK, and SOS gene families  
-- Evolutionary and gene duplication analysis  
-- Promoter cis-regulatory element analysis  
-- Transcriptomic profiling under drought stress  
-- Protein structure prediction and validation  
-- Molecular docking with phytochemicals  
-
----
-
-## Biological System
-
-- Target species: Fagopyrum esculentum (buckwheat)  
-- Transcriptomic reference: Fagopyrum tataricum  
-- Stress condition: Drought stress  
+MCScanX was selected because:
+- It runs offline  
+- Does not require BED format  
+- Accepts protein FASTA, gene position file, and BLASTP output  
+- Generates:
+  - Collinear blocks  
+  - Synteny tables  
+  - Dotplots and HTML visualizations  
 
 ---
 
-## Workflow Overview
+## 💻 Computational Environment
 
-Genome → Gene Identification → Duplication Analysis → Promoter Analysis → RNA-seq → Protein Structure → Docking → Integration  
+- Windows 11  
+- WSL (Ubuntu) for Linux execution  
+- MCScanX compiled from source inside WSL  
 
-### Stepwise Workflow
-
-1. Genome and annotation retrieval  
-2. Identification of CBL, CIPK, SOS gene families  
-3. Domain and motif validation  
-4. Gene duplication classification and synteny analysis  
-5. Promoter cis-element analysis  
-6. RNA-seq differential expression analysis  
-7. Protein structure prediction using AlphaFold  
-8. Molecular docking with phytochemicals  
-9. Biological interpretation and integration  
+This setup was used to avoid Windows binary compatibility issues.
 
 ---
 
-## Key Results
-Genome dataset downloaded from NCBI (GCA_033239045.1)
-### Gene Duplication
-| Type | Count |
-|------|------|
-| Tandem | 0 |
-| Proximal | 0 |
-| Segmental | 31 |
-| Dispersed | 0 |
+## 📁 Project Folder Organization
+
+Working directory:
+
+C:\mcscan_project
+
+WSL directory:
+
+~/mcscan_project
+
+Files were copied into WSL home directory to avoid permission issues from /mnt/c/.
 
 ---
 
-### RNA-seq Differential Expression
-- Upregulated genes: 3307  
-- Downregulated genes: 3042  
+## 📥 Input File Preparation
+
+### 1. Protein FASTA
+*FES_protein.fasta*
+- Contains protein sequences of all genes  
+- Gene IDs retained from original dataset  
 
 ---
 
-### Molecular Docking
-| Protein | Binding Energy (kcal/mol) | Interpretation |
-|----------|--------------------------|----------------|
-| P1 | -7.983 | Strong binding |
-| P3 | -6.184 | Moderate binding |
-| P5 | -6.126 | Moderate binding |
-| P2 | -4.493 | Weak binding |
-| P4 | +11.140 | Unfavorable |
+### 2. Gene Position File (GFF Conversion)
+
+Original GFF format was incompatible with MCScanX.
+
+Converted using:
+
+fix_gff.py
+
+Final file:
+
+FES_genes.gff
+
+Required format:
+
+Chromosome   Gene_ID   Start   End
 
 ---
 
-## Tools Used
+### 3. BLASTP File
 
-- BLAST+  
-- InterProScan  
-- MUSCLE  
-- MEME Suite  
-- MCScanX  
-- DESeq2 (R)  
-- AlphaFold / ColabFold  
-- AutoDock Vina  
-- PyMOL  
-- Python (Matplotlib, Seaborn)  
+All-vs-all BLASTP was performed using protein FASTA.
+
+FES_genes.blast
+
+Validation:
+- 12-column BLAST format confirmed  
+- Includes identity, alignment length, E-value, and bit score  
 
 ---
 
-## Key Findings
+## 🔧 File Format Normalization
 
-- CBL–CIPK–SOS pathway is highly conserved in buckwheat  
-- Segmental duplication drives gene family expansion  
-- Strong transcriptional reprogramming under drought stress  
-- Potential phytochemical–protein interactions identified  
-
----
-
-## Limitations
-
-- Fully computational study  
-- RNA-seq derived from related species (F. tataricum)  
-- Docking results require experimental validation  
+- Windows (CRLF) → Linux (LF) conversion issues resolved  
+- Files moved to WSL home directory  
+- Ensured MCScanX compatibility  
 
 ---
 
-## Future Work
+## ⚙️ MCScanX Installation
 
-- Experimental validation (qPCR / wet lab)  
-- CRISPR functional studies  
-- Metabolomic integration  
-- Field-level stress analysis  
+Windows binary failed:
 
----
+cannot execute binary file: Exec format error
 
-## Author
+### Solution: Compile from source
 
-Priyanka Siriga  
+```bash
+git clone https://github.com/wyp1125/MCScanX.git
+cd MCScanX
+make
 
----
+✔ Compilation successful
+✔ Core module ready for analysis
 
-## References
-
-Bailey, T.L. et al. (2009). MEME Suite. Nucleic Acids Research, 37, W202–W208.  
-Conesa, A. et al. (2016). RNA-seq best practices. Genome Biology, 17, 13.  
-Edgar, R.C. (2004). MUSCLE alignment. Nucleic Acids Research, 32, 1792–1797.  
-Jumper, J. et al. (2021). AlphaFold. Nature, 596, 583–589.  
-Jones, P. et al. (2014). InterProScan 5. Bioinformatics, 30, 1236–1240.  
-Liao, Y. et al. (2014). featureCounts. Bioinformatics, 30, 923–930.  
-Love, M.I. et al. (2014). DESeq2. Genome Biology, 15, 550.  
-O’Boyle, N.M. et al. (2011). Open Babel. Journal of Cheminformatics, 3, 33.  
-Trott, O. & Olson, A.J. (2010). AutoDock Vina. Journal of Computational Chemistry, 31, 455–461.  
-Wang, Y. et al. (2012). MCScanX. Nucleic Acids Research, 40, e49.  
-Yamaguchi-Shinozaki, K. & Shinozaki, K. (2005). Stress cis-elements. Plant Physiology, 139, 411–418.  
-Zhu, J.K. (2002, 2016). Abiotic stress signaling. Annual Review of Plant Biology / Plant Journal.  
 
 ---
 
-## Note
+▶️ Running MCScanX
 
-This pipeline is fully reproducible and designed for plant multi-omics and abiotic stress research.
+Command used:
 
+./MCScanX/MCScanX FES
+
+
+---
+
+📊 Output Files
+
+FES.collinearity
+
+FES.html
+
+
+
+---
+
+📈 Results Interpretation
+
+1. MCScanX Output
+
+BLAST pairs imported successfully
+
+No collinear gene blocks detected
+
+
+
+---
+
+2. BLAST Statistics
+
+Total BLAST hits:
+
+73
+
+
+---
+
+3. Gene Consistency Check
+
+Gene IDs were consistent across:
+
+FASTA
+
+GFF
+
+BLAST
+
+
+
+---
+
+4. Biological Interpretation
+
+MCScanX requires:
+
+Larger gene sets
+
+Higher genomic density
+
+Multiple homologous regions
+
+
+In this dataset:
+
+Small gene family was analyzed
+
+No collinear blocks is a biologically valid result
+
+Not a pipeline error
+
+
+
+---
+
+📁 Files Included
+
+FES_protein.fasta
+
+FES_genes.blast
+
+FES_genes_gff.pos
+
+FES_genes.collinearity
+
+
+
+---
+
+🧠 Conclusion
+
+The MCScanX pipeline was successfully executed in a WSL environment. Although no collinearity blocks were detected, this reflects the limited size of the gene dataset rather than a technical issue. The workflow is fully reproducible and ready for scaling to larger genomic datasets.
