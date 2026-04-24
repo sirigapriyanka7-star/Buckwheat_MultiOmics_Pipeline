@@ -1,4 +1,4 @@
-# 🧬 Gene Mapping and Chromosomal Distribution (MG2C Analysis)
+# 🧬Gene Mapping and Chromosomal Distribution (MG2C Analysis)
 
 ## 📌 Objective
 To map CBL and CIPK genes onto their respective scaffolds/chromosomes of Fagopyrum esculentum and visualize their chromosomal distribution using MG2C (Map Gene2Chromosome).
