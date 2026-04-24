@@ -1,0 +1,107 @@
+[10:22, 16/02/2026] 👻: import pandas as pd
+
+# Load duplication table
+dup = pd.read_excel("InputFiles/DuplicationTable.xlsx")
+
+# Load GFF file
+gff = pd.read_csv(
+    "InputFiles/genes.gff",
+    sep="\t",
+    header=None,
+    comment="#"
+)
+
+gff.columns = [
+    "chr", "source", "feature", "start",
+    "end", "score", "strand", "phase", "attributes"
+]
+
+# Extract gene ID from GFF attributes
+gff["GeneID"] = gff["attributes"].str.extract(r'ID=([^;]+)')
+
+# Keep only gene features (optional but recommended)
+genes = gff[gff["feature"] == "gene"][["GeneID", "chr", "start", "end"]]
+
+# Merge duplication table with GFF coordinates
+merged = dup.merge(genes, left_on="Gene1", right_on="GeneID", how="left")
+merged = merged.rename(columns={
+    "chr": "Chr1",
+    "start": "Start1",
+    "end": "End1"
+})
+merged = merged.drop(columns=["GeneID"])
+
+merged = merged.merge(genes, left_on="Gene2", right_on="GeneID", how="left")
+merged = merged.rename(columns={
+    "chr": "Chr2",
+    "start": "Start2",
+    "end": "End2"
+})
+merged = merged.drop(columns=["GeneID"])
+
+# Save output
+merged.to_excel("Integrated_Duplication_Table.xlsx", index=False)
+
+print("Integration completed successfully!")
+[10:25, 16/02/2026] 👻: python add_gff_features.py
+[10:27, 16/02/2026] 👻: pip install pandas openpyxl
+[10:36, 16/02/2026] 👻: pd.read_csv()
+[10:40, 16/02/2026] 👻: import pandas as pd
+import os
+
+# Create Output folder if not present
+os.makedirs("Output", exist_ok=True)
+
+# Read duplication table (text file with .xlsx name)
+dup = pd.read_csv("InputFiles/DuplicationTable.xlsx", sep="\t")
+
+# Read GFF file
+gff = pd.read_csv("InputFiles/genes.gff", sep="\t", comment="#", header=None)
+
+gff.columns = [
+    "chr", "source", "feature", "start", "end",
+    "score", "strand", "phase", "attributes"
+]
+
+# Keep only gene features
+gff_genes = gff[gff["feature"] == "gene"].copy()
+
+# Extract gene ID from attributes column
+gff_genes["gene_id"] = gff_genes["attributes"].str.extract(r'ID=([^;]+)')
+
+# Merge coordinates for Gene1
+dup = dup.merge(
+    gff_genes[["gene_id", "chr", "start", "end"]],
+    left_on="Gene1",
+    right_on="gene_id",
+    how="left"
+)
+
+dup = dup.rename(columns={
+    "chr": "Gene1_chr",
+    "start": "Gene1_start",
+    "end": "Gene1_end"
+})
+
+dup = dup.drop(columns=["gene_id"])
+
+# Merge coordinates for Gene2
+dup = dup.merge(
+    gff_genes[["gene_id", "chr", "start", "end"]],
+    left_on="Gene2",
+    right_on="gene_id",
+    how="left"
+)
+
+dup = dup.rename(columns={
+    "chr": "Gene2_chr",
+    "start": "Gene2_start",
+    "end": "Gene2_end"
+})
+
+dup = dup.drop(columns=["gene_id"])
+
+# Save output
+dup.to_excel("Output/DuplicationTable_Integrated.xlsx", index=False)
+
+print("Integration completed successfully!")
