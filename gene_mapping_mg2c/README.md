@@ -16,7 +16,7 @@ To map CBL and CIPK genes onto their respective scaffolds/chromosomes of Fagopyr
   - Contains total lengths of scaffolds/chromosomes used for scaling
 
 - Project documentation:
-  - Project progress (7) 1 (2).docx
+  - Project progress.docx
 
 ---
 
