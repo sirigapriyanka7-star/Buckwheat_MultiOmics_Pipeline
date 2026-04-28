@@ -5,7 +5,6 @@ To identify, validate, and classify CIPK (CBL-Interacting Protein Kinase) family
 
 ---
 
-## 📊 Table 3 Summary
 Arabidopsis CIPK1–CIPK26 proteins were used as queries to identify homologs in buckwheat. Multiple significant hits were obtained with high sequence identity, query coverage, and conserved domain architecture (Ser/Thr kinase + NAF/FISL domains).
 
 ---
