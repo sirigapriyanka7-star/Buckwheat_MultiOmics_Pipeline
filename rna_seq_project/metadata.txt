@@ -1,0 +1,5 @@
+sample                      condition
+SRR29434873_sorted.bam      drought
+SRR29434877_sorted.bam      drought
+SRR29434880_sorted.bam      control
+SRR29434881_sorted.bam      control
