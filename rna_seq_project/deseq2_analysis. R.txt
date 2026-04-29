@@ -1,0 +1,98 @@
+#!/usr/bin/env Rscript
+
+# ================================
+# RNA-seq Differential Expression Analysis
+# ================================
+
+# Load libraries
+library(DESeq2)
+library(ggplot2)
+library(matrixStats)
+
+# -------------------------------
+# STEP 1 — Load featureCounts data
+# -------------------------------
+fc <- read.table("gene_counts.txt", header=TRUE, check.names=FALSE)
+
+counts <- fc[, 7:ncol(fc)]
+rownames(counts) <- fc$Geneid
+
+# -------------------------------
+# STEP 2 — Load metadata
+# -------------------------------
+coldata <- read.table("metadata.txt", header=TRUE, row.names=1)
+
+colnames(counts) <- gsub("_sorted\\.bam", "", colnames(counts))
+rownames(coldata) <- gsub("_sorted\\.bam", "", rownames(coldata))
+
+counts <- counts[, rownames(coldata)]
+
+stopifnot(all(colnames(counts) == rownames(coldata)))
+
+# -------------------------------
+# STEP 3 — DESeq2 analysis
+# -------------------------------
+dds <- DESeqDataSetFromMatrix(
+  countData = counts,
+  colData = coldata,
+  design = ~ condition
+)
+
+dds <- DESeq(dds)
+
+res <- results(dds, contrast=c("condition","drought","control"))
+
+# Save full results
+write.csv(as.data.frame(res), "results/DEG_results.csv")
+
+# -------------------------------
+# STEP 4 — Significant genes
+# -------------------------------
+sig <- res[!is.na(res$padj) & res$padj < 0.05, ]
+
+write.csv(as.data.frame(sig), "results/significant_DEGs.csv")
+
+# -------------------------------
+# STEP 5 — Up / Down regulation
+# -------------------------------
+res_df <- as.data.frame(res)
+
+up <- res_df[res_df$log2FoldChange > 1 & res_df$padj < 0.05, ]
+down <- res_df[res_df$log2FoldChange < -1 & res_df$padj < 0.05, ]
+
+write.csv(up, "results/upregulated_genes.csv")
+write.csv(down, "results/downregulated_genes.csv")
+
+# -------------------------------
+# STEP 6 — Volcano plot
+# -------------------------------
+pdf("results/volcano_plot.pdf")
+
+ggplot(res_df, aes(x=log2FoldChange, y=-log10(padj))) +
+  geom_point(alpha=0.5) +
+  theme_minimal()
+
+dev.off()
+
+# -------------------------------
+# STEP 7 — Functional classification
+# -------------------------------
+deg <- read.csv("results/DEG_results.csv")
+
+sig2 <- deg[!is.na(deg$padj) & deg$padj < 0.05, ]
+
+sig2$category <- "Unannotated"
+
+if ("description" %in% colnames(sig2)) {
+  sig2$category[grepl("kinase", sig2$description, ignore.case=TRUE)] <- "Kinase activity"
+  sig2$category[grepl("transcription", sig2$description, ignore.case=TRUE)] <- "Transcription factor"
+  sig2$category[grepl("transport", sig2$description, ignore.case=TRUE)] <- "Transport"
+  sig2$category[grepl("stress", sig2$description, ignore.case=TRUE)] <- "Stress response"
+}
+
+write.csv(table(sig2$category), "results/functional_summary.csv")
+
+# -------------------------------
+# DONE
+# -------------------------------
+cat("RNA-seq analysis completed successfully.\n")
