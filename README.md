@@ -284,9 +284,10 @@ gene_family_identification/
 ├── interpro/
 │
 ├── Project final file.docx
-│
+├── Software Versions.txt
 ├── README.md
 └── .gitignore
+
 
 ---
 
