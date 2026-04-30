@@ -1,4 +1,4 @@
-# 🧬 Buckwheat Multi-Omics Pipeline
+# 🧬 Genome-wide characterization of the CBL–CIPK–SOS signaling network in Fagopyrum esculentum with drought-responsive transcriptomic insights from Fagopyrum tataricum
 
 ![Bioinformatics](https://img.shields.io/badge/Bioinformatics-MultiOmics-blue)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
