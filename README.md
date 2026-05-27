@@ -301,7 +301,7 @@ gene_family_identification/
 
 ## 👩‍🔬 Author
 
-*Siriga Priyanka*
+*Priyanka Siriga*
 
 ---
 
