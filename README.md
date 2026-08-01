@@ -300,7 +300,7 @@ gene_family_identification/
 ---
 
 ## 👩‍🔬 Author
-
+Priyanka Siriga
 ---
 
 ## 📌 Final Summary
